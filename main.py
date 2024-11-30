@@ -57,7 +57,7 @@ class CppMember:
 
     def __str__(self):
         """Return the string representation of the member."""
-        return f"{self.type_name} {self.name}{"" if self.value == "" else "= " + self.value};"
+        return f"{self.type_name} {self.name}{'' if self.value == '' else '= ' + self.value};"
 
 
 class CppMethod:
