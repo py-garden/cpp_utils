@@ -92,7 +92,7 @@ class CppMethod:
         """Return the declaration of the method"""
         space = " " if self.return_type != "" else ""
         qualifier_str = " " + " ".join(self.qualifiers) if len(self.qualifiers) != 0 else ''
-        return f"{self.return_type}{space}{self.name}({", ".join([p.get_str_repr(False) for p in self.parameters])}){qualifier_str};"
+        return f"{self.return_type}{space}{self.name}({', '.join([p.get_str_repr(False) for p in self.parameters])}){qualifier_str};"
 
     def get_definition(self, class_name: str) -> str:
         """Return the definition of the method with class name prepended."""
@@ -102,10 +102,10 @@ class CppMethod:
 
         definition = ""
         if self.define_in_header:
-            definition = f"{self.return_type}{space}{self.name}({", ".join([p.get_str_repr(True) for p in self.parameters])}){initializer}{qualifier_str} {{\n    {self.body}\n}}"
+            definition = f"{self.return_type}{space}{self.name}({', '.join([p.get_str_repr(True) for p in self.parameters])}){initializer}{qualifier_str} {{\n    {self.body}\n}}"
         else:
             # TODO: verify if this is the correct syntax wrt initializer list and qualifier string, could be a problem.
-            definition = f"{self.return_type}{space}{class_name}::{self.name}({", ".join([p.get_str_repr(True) for p in self.parameters])}){initializer}{qualifier_str} {{\n    {self.body}\n}}"
+            definition = f"{self.return_type}{space}{class_name}::{self.name}({', '.join([p.get_str_repr(True) for p in self.parameters])}){initializer}{qualifier_str} {{\n    {self.body}\n}}"
 
         return definition
 
